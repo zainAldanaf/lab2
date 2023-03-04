@@ -89,6 +89,23 @@ public class Main2Activity extends AppCompatActivity implements UserAdapter.Item
                     }
                 });
     }
+    public void deleteUser(final User user){
+        db.collection("Users").document(user.getId())
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+
+                    @Override
+                    public void onSuccess(Void unused) {
+                        items.remove(user);
+                        adapter.notifyDataSetChanged();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
+    }
 
 
 
@@ -98,7 +115,6 @@ public class Main2Activity extends AppCompatActivity implements UserAdapter.Item
 
     @Override
     public void onItemClick2(int position, String id) {
-
 
     }
 }
